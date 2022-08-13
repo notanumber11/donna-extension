@@ -35,6 +35,12 @@
         "reservedFirst": true,
         "noSortAlphabetically": true
       }
+    ],
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
     ]
   },
   "env": {

@@ -27,7 +27,7 @@ export default function HelloWorld(props: HelloWorldProps) {
       </p>
 
       <p>
-        See <code>README.md</code> for more information.
+        See <code>README.md</code> for more information 210.
       </p>
 
       <p>
