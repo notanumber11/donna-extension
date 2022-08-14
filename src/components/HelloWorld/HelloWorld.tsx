@@ -50,7 +50,7 @@ export default function HelloWorld(props: HelloWorldProps) {
       <p>
         Edit
         <code>components/HelloWorld/HelloWorld.tsx</code> to test hot module
-        replacement.
+        replacement 2.
       </p>
     </div>
   );

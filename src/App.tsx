@@ -1,7 +1,7 @@
 import Button from "@mui/material/Button";
 
 import Logo from "@/assets/logo.png";
-import HelloWorld from "@/components/HelloWorld/HelloWorld";
+import CustomFrame from "@/components/CustomFrame";
 
 import styles from "./App.module.css";
 
@@ -16,7 +16,9 @@ export default function App() {
         alt="logo"
       />
       <img className={styles.logo} alt="React logo" width="400px" src={Logo} />
-      <HelloWorld msg="Hello React + TypeScript + Vite" />
+      <CustomFrame>
+        <Button variant="contained">Inside frame</Button>
+      </CustomFrame>
       <Button variant="contained">Hello World</Button>
     </main>
   );
