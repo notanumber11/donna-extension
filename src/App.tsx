@@ -1,3 +1,5 @@
+import Button from "@mui/material/Button";
+
 import Logo from "@/assets/logo.png";
 import HelloWorld from "@/components/HelloWorld/HelloWorld";
 
@@ -15,6 +17,7 @@ export default function App() {
       />
       <img className={styles.logo} alt="React logo" width="400px" src={Logo} />
       <HelloWorld msg="Hello React + TypeScript + Vite" />
+      <Button variant="contained">Hello World</Button>
     </main>
   );
 }

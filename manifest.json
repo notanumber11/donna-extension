@@ -15,7 +15,6 @@
     }
   ],
   "background": {
-    "service_worker": "src/background.tsx",
-    "type": "module"
+    "service_worker": "src/background.ts"
   }
 }
