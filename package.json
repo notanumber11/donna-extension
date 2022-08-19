@@ -35,18 +35,20 @@
     }
   },
   "dependencies": {
+    "@emotion/cache": "^11.10.1",
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
-    "@emotion/cache": "^11.10.1",
+    "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.10.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-frame-component": "^5.2.3"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.0.2",
     "@commitlint/config-conventional": "^17.0.2",
     "@commitlint/cz-commitlint": "^17.0.0",
-    "@crxjs/vite-plugin": "^1.0.13",
+    "@crxjs/vite-plugin": "^1.0.14",
     "@cypress/vite-dev-server": "^3.0.0",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",

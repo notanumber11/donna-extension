@@ -6,7 +6,7 @@ export {}; // https://bobbyhadz.com/blog/typescript-cannot-be-compiled-under-iso
 chrome.runtime.onInstalled.addListener(function () {
   console.log("The extension has been installed");
   chrome.contextMenus.create({
-    title: 'Search Google for "%s"',
+    title: 'Donna magic',
     contexts: ["selection"],
     id: "myContextMenuId",
   });

@@ -4,6 +4,10 @@
   "version": "1.0.0",
   "action": { "default_popup": "index.html" },
   "permissions": ["contextMenus", "scripting"],
+  "icons": {
+    "16": "src/assets/menu-icon.png",
+    "96": "src/assets/woman_96_96.png"
+  },
   "content_scripts": [
     {
       "js": ["src/content.tsx"],
@@ -16,5 +20,11 @@
   ],
   "background": {
     "service_worker": "src/background.ts"
-  }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["src/assets/woman_96_96.png"],
+      "matches": [ "*://*/*" ]
+    }
+  ]
 }

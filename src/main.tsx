@@ -1,5 +1,3 @@
-import "./main.css";
-
 import React from "react";
 import { createRoot } from "react-dom/client";
 
@@ -11,7 +9,7 @@ const root = createRoot(container as HTMLDivElement);
 console.log("Start main.tsx");
 root.render(
   <React.StrictMode>
-    <App />
+    <App selectedText={"exampleText"} />
   </React.StrictMode>
 );
 console.log("Finish main.tsx");
