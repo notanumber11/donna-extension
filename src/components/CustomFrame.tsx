@@ -14,23 +14,23 @@ const CustomFrame = (props: CustomFrameProps) => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   const [contentRef, setContentRef] = useState<any>(null);
-  const [flag, setFlag] = useState<boolean>(false);
-  let interval;
+  const [isContentRefSet, setIsContentRefSet] = useState<boolean>(false);
 
-  const setContentRefWrapper = (val: any) => {
-    if (!flag) {
-      if (val) {
-        setContentRef(val);
-        setFlag(true);
+  const setContentRefWrapper = (ref: any) => {
+    if (!isContentRefSet) {
+      if (ref) {
+        setContentRef(ref);
+        setIsContentRefSet(true);
+        // Apply css
         applyCssOverrides();
-        // TODO: Pass a callback to children instead of execute each 200 ms
-        interval = setInterval(() => applyCssOverrides(), 200);
+        setInterval(() => applyCssOverrides(), 250);
       }
     }
   };
 
   // https://www.tutorialrepublic.com/faq/automatically-adjust-iframe-height-according-to-its-contents-using-javascript.php#:~:text=Answer%3A%20Use%20the%20contentWindow%20Property,no%20vertical%20scrollbar%20will%20appear.
   const applyCssOverrides = () => {
+    // console.log("Applying css overrides");
     const fr = document.getElementById("frame-donna");
     if (fr) {
       // Remove default 8px margin that chrome applies to the new <body> under the <iframe>
@@ -49,16 +49,6 @@ const CustomFrame = (props: CustomFrameProps) => {
       fr.style.setProperty("height", fr.style.height, "important");
     }
   };
-
-  // https://dev.to/robmarshall/how-to-use-componentwillunmount-with-functional-components-in-react-2a5g
-  useEffect(() => {
-    // Anything in here is fired on component mount.
-    applyCssOverrides();
-    return () => {
-      // Anything in here is fired on component unmount.
-      clearInterval(interval);
-    };
-  }, []);
 
   const cache = createCache({
     key: "donna-css",
@@ -84,7 +74,9 @@ const CustomFrame = (props: CustomFrameProps) => {
       id={"frame-donna"}
     >
       <div ref={setContentRefWrapper} id={"donna-div"}>
-        {flag && <CacheProvider value={cache}>{props.children}</CacheProvider>}
+        {isContentRefSet && (
+          <CacheProvider value={cache}>{props.children}</CacheProvider>
+        )}
       </div>
     </Frame>
   );

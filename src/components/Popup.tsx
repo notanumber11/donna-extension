@@ -1,16 +1,16 @@
 import CloseIcon from "@mui/icons-material/Close";
-import {CardHeader, Grid, IconButton, Paper} from "@mui/material";
+import { CardHeader, Grid, IconButton, Paper } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
 import Link from "@mui/material/Link";
-import {createTheme, ThemeProvider} from "@mui/material/styles";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
-import {useState} from "react";
+import { useState } from "react";
 
 import womanIcon from "../assets/woman_96_96.png";
 
@@ -36,22 +36,32 @@ const theme = createTheme();
 
 interface PopUpProps {
   selectedText: string;
+  closeCallback: () => void;
 }
 
+let flipText = false;
+
 export default function PopUp(props: PopUpProps) {
+  const [initialText, setInitialText] = useState<string>(props.selectedText);
   const [generatedText, setGeneratedText] = useState<string>("");
   const [isGeneratedTextVisible, setIsGeneratedTextVisible] =
     useState<boolean>(false);
 
   const generateButtonOnClick = () => {
     setIsGeneratedTextVisible(true);
-    const newText = props.selectedText.split(" ").reverse().join(" ");
+    const newText = initialText.split(" ").reverse().join(" ");
     setGeneratedText(newText);
   };
 
   const tryAgainButtonOnClick = () => {
-    const newText = generatedText.split(" ").reverse().join(" ");
-    setGeneratedText(newText);
+    if (flipText) {
+      const newText = initialText.split(" ").reverse().join(" ");
+      setGeneratedText(newText);
+      flipText = false;
+    } else {
+      setGeneratedText(initialText);
+      flipText = true;
+    }
   };
 
   const copyButtonOnClick = () => {
@@ -86,7 +96,7 @@ export default function PopUp(props: PopUpProps) {
               </Avatar>
             }
             action={
-              <IconButton aria-label="settings">
+              <IconButton aria-label="settings" onClick={props.closeCallback}>
                 <CloseIcon />
               </IconButton>
             }
@@ -102,10 +112,11 @@ export default function PopUp(props: PopUpProps) {
               fullWidth
               multiline
               id="baseText"
-              value={props.selectedText}
+              value={initialText}
               name="Base text"
               autoComplete="Text to rephrase"
               rows={6}
+              onChange={e => setInitialText(e.target.value)}
             />
             <Button
               fullWidth

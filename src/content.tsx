@@ -1,9 +1,7 @@
 import React from "react";
-import { createRoot } from "react-dom/client";
+import { createRoot, Root } from "react-dom/client";
 
 import App from "@/App";
-
-console.log("End content.tsx");
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   console.log("Start receiving a message");
@@ -18,17 +16,27 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   console.log("Finish receiving a message");
 });
 
+let firstTime = true;
+let root: Root;
+
 function showPopUp(selectedText: string) {
-  const rootDivElement = document.createElement("div");
-  rootDivElement.id = "crx-root";
-  document.body.append(rootDivElement);
-  const root = createRoot(rootDivElement as HTMLDivElement);
+  console.log("Start showPopUp");
+  if (firstTime) {
+    console.log("Creating root element");
+    const rootDivElement = document.createElement("div");
+    rootDivElement.id = "crx-root";
+    document.body.append(rootDivElement);
+    root = createRoot(rootDivElement as HTMLDivElement);
+    firstTime = false;
+  }
 
-  console.log("Start content.tsx");
-
-  root.render(
-    <React.StrictMode>
-      <App selectedText={selectedText} />
-    </React.StrictMode>
-  );
+  if (root) {
+    console.log("Executing render");
+    root.render(
+      <React.StrictMode>
+        <App selectedText={selectedText} />
+      </React.StrictMode>
+    );
+  }
+  console.log("Finish showPopUp");
 }
