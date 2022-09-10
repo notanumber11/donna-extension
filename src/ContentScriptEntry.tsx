@@ -7,7 +7,7 @@ interface AppProps {
   selectedText: string;
 }
 
-export default function App(appProps: AppProps) {
+export default function ContentScriptEntry(appProps: AppProps) {
   const [isOpen, setIsOpen] = useState<boolean>(true);
 
   useEffect(() => {

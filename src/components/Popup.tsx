@@ -12,6 +12,8 @@ import Typography from "@mui/material/Typography";
 import * as React from "react";
 import { useState } from "react";
 
+import { callDonnaBackendAPI } from "@/components/donnaBackend/donnaBackendAPI";
+
 import womanIcon from "../assets/woman_96_96.png";
 
 function Copyright(props: any) {
@@ -39,9 +41,8 @@ interface PopUpProps {
   closeCallback: () => void;
 }
 
-let flipText = false;
-
 export default function PopUp(props: PopUpProps) {
+  const loadingMessage = "Generating your text . . .";
   const [initialText, setInitialText] = useState<string>(props.selectedText);
   const [generatedText, setGeneratedText] = useState<string>("");
   const [isGeneratedTextVisible, setIsGeneratedTextVisible] =
@@ -49,20 +50,29 @@ export default function PopUp(props: PopUpProps) {
 
   const generateButtonOnClick = () => {
     setIsGeneratedTextVisible(true);
-    const newText = initialText.split(" ").reverse().join(" ");
-    setGeneratedText(newText);
+    setGeneratedText(loadingMessage);
+    callDonna(initialText);
   };
 
   const tryAgainButtonOnClick = () => {
-    if (flipText) {
-      const newText = initialText.split(" ").reverse().join(" ");
-      setGeneratedText(newText);
-      flipText = false;
-    } else {
-      setGeneratedText(initialText);
-      flipText = true;
-    }
+    setGeneratedText(loadingMessage);
+    callDonna(initialText);
   };
+
+  function callDonna(initialText: string) {
+    const startTime = performance.now();
+    callDonnaBackendAPI(initialText)
+      .then(response => response.json())
+      .then(data => {
+        const endTime = performance.now();
+        const elapsedTime = endTime - startTime;
+        console.log("The elapsed time of the network call is: " + elapsedTime);
+        console.log("The result is:");
+        const result = data;
+        console.log(result);
+        setGeneratedText(result);
+      });
+  }
 
   const copyButtonOnClick = () => {
     navigator.clipboard.writeText(generatedText).then(() => {
@@ -114,6 +124,7 @@ export default function PopUp(props: PopUpProps) {
               id="baseText"
               value={initialText}
               name="Base text"
+              placeholder="Write here the text that you want to rewrite."
               autoComplete="Text to rephrase"
               rows={6}
               onChange={e => setInitialText(e.target.value)}

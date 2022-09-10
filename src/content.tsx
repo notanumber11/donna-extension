@@ -1,7 +1,7 @@
 import React from "react";
 import { createRoot, Root } from "react-dom/client";
 
-import App from "@/App";
+import ContentScriptEntry from "@/ContentScriptEntry";
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   console.log("Start receiving a message");
@@ -34,7 +34,7 @@ function showPopUp(selectedText: string) {
     console.log("Executing render");
     root.render(
       <React.StrictMode>
-        <App selectedText={selectedText} />
+        <ContentScriptEntry selectedText={selectedText} />
       </React.StrictMode>
     );
   }
