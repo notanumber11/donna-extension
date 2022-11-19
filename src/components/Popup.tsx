@@ -1,5 +1,14 @@
 import CloseIcon from "@mui/icons-material/Close";
-import { CardHeader, Grid, IconButton, Paper } from "@mui/material";
+import {
+  CardHeader,
+  FormControl,
+  Grid,
+  IconButton,
+  InputLabel,
+  MenuItem,
+  Paper,
+  Select,
+} from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -44,6 +53,7 @@ interface PopUpProps {
 export default function PopUp(props: PopUpProps) {
   const loadingMessage = "Generating your text . . .";
   const [initialText, setInitialText] = useState<string>(props.selectedText);
+  const [rewriteType, setRewriteType] = useState<string>("Creative");
   const [generatedText, setGeneratedText] = useState<string>("");
   const [isGeneratedTextVisible, setIsGeneratedTextVisible] =
     useState<boolean>(false);
@@ -51,17 +61,17 @@ export default function PopUp(props: PopUpProps) {
   const generateButtonOnClick = () => {
     setIsGeneratedTextVisible(true);
     setGeneratedText(loadingMessage);
-    callDonna(initialText);
+    callDonna(initialText, rewriteType);
   };
 
   const tryAgainButtonOnClick = () => {
     setGeneratedText(loadingMessage);
-    callDonna(initialText);
+    callDonna(initialText, rewriteType);
   };
 
-  function callDonna(initialText: string) {
+  function callDonna(initialText: string, rewriteType: string) {
     const startTime = performance.now();
-    callDonnaBackendAPI(initialText)
+    callDonnaBackendAPI(initialText, rewriteType)
       .then(response => response.json())
       .then(data => {
         const endTime = performance.now();
@@ -129,6 +139,22 @@ export default function PopUp(props: PopUpProps) {
               rows={6}
               onChange={e => setInitialText(e.target.value)}
             />
+            <FormControl fullWidth sx={{ mt: 3 }}>
+              <InputLabel id="demo-simple-select-label">Style</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={rewriteType}
+                label="Style"
+                onChange={e => {
+                  setRewriteType(e.target.value);
+                  console.log("The value is: " + e.target.value);
+                }}
+              >
+                <MenuItem value={"Creative"}>Creative</MenuItem>
+                <MenuItem value={"Enhanced"}>Enhanced</MenuItem>
+              </Select>
+            </FormControl>
             <Button
               fullWidth
               variant="contained"
