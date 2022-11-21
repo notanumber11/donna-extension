@@ -13,8 +13,6 @@
     {
       "js": ["src/content.tsx"],
       "matches": [
-        "https://www.google.com/*",
-        "https://www.mail.google.com/*",
         "*://*/*"
       ]
     }

@@ -127,6 +127,22 @@ export default function PopUp(props: PopUpProps) {
             }
           />
           <Box>
+            <FormControl fullWidth sx={{ mb: 3 }}>
+              <InputLabel id="demo-simple-select-label">Style</InputLabel>
+              <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={rewriteType}
+                  label="Style"
+                  onChange={e => {
+                    setRewriteType(e.target.value);
+                    console.log("The value is: " + e.target.value);
+                  }}
+              >
+                <MenuItem value={"Creative"}>Creative</MenuItem>
+                <MenuItem value={"Enhanced"}>Enhanced</MenuItem>
+              </Select>
+            </FormControl>
             <TextField
               required
               fullWidth
@@ -136,25 +152,9 @@ export default function PopUp(props: PopUpProps) {
               name="Base text"
               placeholder="Write here the text that you want to rewrite."
               autoComplete="Text to rephrase"
-              rows={6}
+              rows={7}
               onChange={e => setInitialText(e.target.value)}
             />
-            <FormControl fullWidth sx={{ mt: 3 }}>
-              <InputLabel id="demo-simple-select-label">Style</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={rewriteType}
-                label="Style"
-                onChange={e => {
-                  setRewriteType(e.target.value);
-                  console.log("The value is: " + e.target.value);
-                }}
-              >
-                <MenuItem value={"Creative"}>Creative</MenuItem>
-                <MenuItem value={"Enhanced"}>Enhanced</MenuItem>
-              </Select>
-            </FormControl>
             <Button
               fullWidth
               variant="contained"
@@ -174,7 +174,7 @@ export default function PopUp(props: PopUpProps) {
                   value={generatedText}
                   name="Generated text"
                   autoComplete="Generated text"
-                  rows={6}
+                  rows={7}
                   onChange={e => setGeneratedText(e.target.value)}
                 />
                 <Box>
@@ -205,7 +205,6 @@ export default function PopUp(props: PopUpProps) {
               </Box>
             )}
           </Box>
-          <Copyright sx={{ mt: 2, mb: 2 }} />
         </Container>
       </Paper>
     </ThemeProvider>
