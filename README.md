@@ -1,12 +1,14 @@
 # Donna extension
 
-This AI-powered extension can help you to rewrite any email or message more professionally. This way, you can be sure that your communication is clear and concise. Whether you're communicating with a colleague or client, our app can help you get your point across more effectively.
+This AI-powered chrome extension can help you to rewrite any email or message more professionally. This way, you can be sure that your communication is clear and concise. Whether you're communicating with a colleague or client, our app can help you get your point across more effectively.
 Donna extension uses [OpenAI APIS](https://platform.openai.com/docs/api-reference) to provide you with the latest technologies available for writing.
 
+## What does it look like?
 [Youtube demo](https://www.youtube.com/watch?v=vpeJ9bA1sO4&t=139s)
 
 [Chrome store](https://tinyurl.com/e4ytbsfd)
 
+![Donna screenshot](readme_assets/donnaAfter.png?raw=true "Title")
 
 ## For developers
 This is a [React](https://reactjs.org) + [TypeScript](https://www.typescriptlang.org/) boilerplate built with [Vite](https://vitejs.dev).
